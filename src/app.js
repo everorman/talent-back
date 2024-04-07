@@ -9,9 +9,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.post("/", (req, res) => {
-  const { array } = req.body;
-  const result = squareService.goodSquares(array);
-  res.status(200).send({ result });
+  const { square } = req.body;
+  if (!squareService.validateSquare(square)) return res.status(400).send('Invalid square format');
+  const result = squareService.goodSquares(square);
+  return res.status(200).send({ result });
 });
 
 module.exports = app;

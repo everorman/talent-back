@@ -1,5 +1,5 @@
 const SquaresService = {
-  goodSquares: function (square) {
+  goodSquares: (square) => {
     const n = square.length;
     let count = 0;
 
@@ -34,6 +34,25 @@ const SquaresService = {
       }
     }
     return count;
+  },
+  validateSquare: (square) => {
+    if (square.length >= 1000) return false;
+    for (element of square) {
+      if (!Array.isArray(element) || element.length !== square.length) {
+        console.log('Invalid 1');
+        return false;
+      }
+    }
+    for (element of square) {
+      for (e of element) {
+        if (e !== 0 && e !== 1) {
+          console.log('Invalid 2');
+          return false;
+        }
+      };
+    }
+    return true;
+
   }
 };
 module.exports = SquaresService;
